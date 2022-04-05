@@ -111,6 +111,9 @@ button:active{
         font-weight: 400;
         font-style: italic;
     }
+    .long-quote{
+        font-size: 1.75rem;
+    }
 }
 
 

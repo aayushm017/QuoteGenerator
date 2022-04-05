@@ -35,7 +35,7 @@ function newQuote() {
     }
 
     //Check Quote length to determine styling
-    if (quote.text.length > 60) {
+    if (quote.text.length > 50) {
         quoteText.classList.add('long-quote');  //classList is used to style css classes of an element..
     } else {
         quoteText.classList.remove('long-quote');
