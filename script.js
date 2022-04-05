@@ -23,20 +23,24 @@ function complete() {
 //Show me Quote
 function newQuote() {
     loading();
-    //Pick a random quote from apiQuotes array
+
+    //Pick a random quote from apiQuotes array..
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-    //Check if author field is blank and replace it with 'Unknown' 
+
+    //Check if author field is blank and replace it with 'Unknown' ..
     if (!quote.author) {
         authorText.textContent = 'Unknown';
     } else {
         authorText.textContent = quote.author;
     }
+
     //Check Quote length to determine styling
-    if (quote.text.length > 80) {
-        quoteText.classList.add('long-quote');
+    if (quote.text.length > 60) {
+        quoteText.classList.add('long-quote');  //classList is used to style css classes of an element..
     } else {
         quoteText.classList.remove('long-quote');
     }
+
     //Set Quote, Hide Loader
     quoteText.textContent = quote.text;
     complete();
@@ -49,6 +53,7 @@ async function getQuotes() {
     try {
         const response = await fetch(apiUrl);  //If we do not assign async,await, fetch then the response will be set to value and it will provide error.
         apiQuotes = await response.json();
+        console.log(apiQuotes);
         newQuote();
     } catch (error) {
         // Catch Error here
@@ -57,14 +62,14 @@ async function getQuotes() {
 
 //Tweet Quote
 function tweetQuote() {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`; //We are going to use template string which allows us to pass in a variable and it will be converted into string.. 
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    //${quoteText.textContent} - ${authorText.textContent}`,, We are going to use template string which allows us to pass in a variable and it will be converted into string and it will be pasted to twitter.com
     window.open(twitterUrl, '_blank');
 }
 
 //Event Listeners
 newQuoteBtn.addEventListener('click', newQuote);
 twitterBtn.addEventListener('click', tweetQuote);
-
 
 //On Load
 getQuotes();
